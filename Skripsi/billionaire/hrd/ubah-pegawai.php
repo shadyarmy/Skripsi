@@ -12,9 +12,9 @@ if(empty($_SESSION)){
 </head>
 <body>
 	<center><h1>Ubah Data</h1></center>
-	<form method="post" name="ubahpegawai">
+	<form method="post" name="ubahpegawai" action="../billionaire/hrd/proses-ubah-pegawai.php">
 		<table class="table">
-			<?php				
+			<?php
 				include "./koneksi.php";
 				$query = mysqli_query($koneksi, "SELECT * FROM pegawai where id_pegawai='$_GET[id_pegawai]'");
     			$row = mysqli_fetch_array($query);
@@ -82,25 +82,6 @@ if(empty($_SESSION)){
             <button type="submit" name="ubahpegawai" class="btn btn-primary" value="submit">Save</button>
 		</center>
 	</form>
-		
+
 </body>
 </html>
-
-
-<?php
-	if(isset($_POST['ubahpegawai'])){
-		include "./koneksi.php";
-		$nama = $_POST['nama'];
-		$alamat = $_POST['alamat'];
-		$no_telp = $_POST['no_telp'];
-		$email = $_POST['email'];
-		$jabatan = $_POST['jabatan'];
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-		$enkrip = md5($password);
-
-		$query_update = mysqli_query($koneksi, "UPDATE pegawai SET nama='$nama', alamat ='$alamat', no_telp='$no_telp', jabatan = '$jabatan', username ='$username', password = '$enkrip' WHERE id_pegawai = '$id_pegawai'") or die (mysqli_error($koneksi));
-		echo '<script language="javascript">alert("Sukses Mengubah Data pengguna");document.location="?page=data-pegawai"</script>';
-
-	}
-?>
